@@ -1,0 +1,126 @@
+Sending build context to Docker daemon 26.11 kB
+Step 1 : FROM ubuntu:latest
+ ---> 4ca3a192ff2a
+Step 2 : MAINTAINER Paulo Coutinho
+ ---> Using cache
+ ---> 22fdb271b742
+Step 3 : RUN apt-get update && apt-get install -y      build-essential      git 	 python      wget 	 nano 	 curl 	 unzip 	 m4 	 golang
+ ---> Using cache
+ ---> 6e0a99c9de42
+Step 4 : ENV GO_VERSION 1.7.4
+ ---> Using cache
+ ---> 037f7cbab2ad
+Step 5 : ENV INSTALLED_GOLANG 1.6
+ ---> Using cache
+ ---> dd11d04bb730
+Step 6 : ENV GOROOT_BOOTSTRAP /usr/lib/go-${INSTALLED_GOLANG}
+ ---> Using cache
+ ---> e1928a475873
+Step 7 : ENV GOOS android
+ ---> Using cache
+ ---> 8445fec41cbd
+Step 8 : ENV GOARCH arm
+ ---> Using cache
+ ---> b9e3b629697d
+Step 9 : ENV BASE_DIR /golang-from-scratch
+ ---> Using cache
+ ---> 7ec616e79551
+Step 10 : RUN mkdir -p ${BASE_DIR}
+ ---> Using cache
+ ---> 8e53cf0fff4e
+Step 11 : WORKDIR ${BASE_DIR}
+ ---> Using cache
+ ---> 6882e1837ac6
+Step 12 : RUN git clone https://go.googlesource.com/go
+ ---> Using cache
+ ---> ee0f614cb51d
+Step 13 : WORKDIR ${BASE_DIR}/go
+ ---> Using cache
+ ---> f18532b5ba8b
+Step 14 : RUN git checkout go${GO_VERSION}
+ ---> Using cache
+ ---> 6e98d39a46d6
+Step 15 : ENV ANDROID_API 15
+ ---> Using cache
+ ---> b2ea4be9b413
+Step 16 : RUN wget https://dl.google.com/android/repository/android-ndk-r13b-linux-x86_64.zip -O ${BASE_DIR}/android-ndk-r13b-linux-x86_64.zip
+ ---> Using cache
+ ---> b296603ddbfa
+Step 17 : RUN unzip ${BASE_DIR}/android-ndk-r13b-linux-x86_64.zip -d ${BASE_DIR}
+ ---> Using cache
+ ---> 4a7760b24d18
+Step 18 : ENV NDK_HOME ${BASE_DIR}/android-ndk-r13b
+ ---> Using cache
+ ---> d1bd22d0debe
+Step 19 : ENV NDK_GCC_VERSION 4.9
+ ---> Using cache
+ ---> b4eba6652a6a
+Step 20 : WORKDIR ${NDK_HOME}/build/tools
+ ---> Using cache
+ ---> 1a67de2d8660
+Step 21 : RUN ./make_standalone_toolchain.py --arch arm --install-dir ${BASE_DIR}/arm-toolchain
+ ---> Using cache
+ ---> 0b982aa10e1d
+Step 22 : ENV ARM_TOOLCHAIN ${BASE_DIR}/arm-toolchain
+ ---> Using cache
+ ---> dec994e54d62
+Step 23 : ENV CROSS_COMPILER_PREFIX ${ARM_TOOLCHAIN}/bin/arm-linux-androideabi
+ ---> Using cache
+ ---> b58c4a52b55d
+Step 24 : ENV AR ${CROSS_COMPILER_PREFIX}-ar
+ ---> Using cache
+ ---> 8e35de761269
+Step 25 : ENV CC ${CROSS_COMPILER_PREFIX}-gcc
+ ---> Using cache
+ ---> 16d0fea6135b
+Step 26 : ENV CXX ${CROSS_COMPILER_PREFIX}-g++
+ ---> Using cache
+ ---> a238d3becdb0
+Step 27 : ENV CPP ${CROSS_COMPILER_PREFIX}-cpp
+ ---> Using cache
+ ---> 51e158a742a5
+Step 28 : ENV GOARM 7
+ ---> Using cache
+ ---> 997026fa8133
+Step 29 : ENV CGO_ENABLED 1
+ ---> Using cache
+ ---> 901dcfef5bc9
+Step 30 : WORKDIR ${BASE_DIR}/go/src
+ ---> Using cache
+ ---> 3730e541e110
+Step 31 : RUN ./make.bash
+ ---> Running in 925ab74b641d
+##### Building Go bootstrap tool.
+cmd/dist
+
+##### Building Go toolchain using /usr/lib/go-1.6.
+[91mbootstrap/internal/sys
+bootstrap/asm/internal/flags
+[0m[91mbootstrap/internal/obj
+[0m[91mbootstrap/internal/bio
+[0m[91mbootstrap/compile/internal/big
+[0m[91mbootstrap/internal/obj/arm
+[0m[91mbootstrap/internal/obj/arm64
+[0m[91mbootstrap/internal/obj/mips
+[0m[91mbootstrap/internal/obj/ppc64
+[0m[91mbootstrap/internal/obj/s390x
+[0m[91mbootstrap/internal/obj/x86
+[0m[91mbootstrap/asm/internal/lex
+[0m[91mbootstrap/asm/internal/arch
+[0m[91mbootstrap/compile/internal/ssa
+[0m[91mbootstrap/asm/internal/asm
+[0m[91mbootstrap/asm
+[0m[91mbootstrap/internal/gcprog
+[0m[91mbootstrap/link/internal/ld
+[0m[91mbootstrap/compile/internal/gc
+[0m[91mbootstrap/link/internal/amd64
+[0m[91mbootstrap/link/internal/arm
+[0m[91mbootstrap/link/internal/arm64
+[0m[91mbootstrap/link/internal/mips64
+[0m[91mbootstrap/link/internal/ppc64
+[0m[91mbootstrap/link/internal/s390x
+[0m[91mbootstrap/link/internal/x86
+[0m[91mbootstrap/link
+[0m[91mbootstrap/compile/internal/amd64
+[0m[91mbootstrap/compile/internal/arm
+[0m
