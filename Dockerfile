@@ -27,7 +27,7 @@ ENV CGO_ENABLED=1
 ENV BASE_DIR=/golang-for-arm
 RUN mkdir -p ${BASE_DIR}
 
-# golang
+# download golang
 WORKDIR ${BASE_DIR}
 RUN git clone https://go.googlesource.com/go
 WORKDIR ${BASE_DIR}/go
@@ -52,6 +52,7 @@ ENV CC=${CROSS_COMPILER_PREFIX}-gcc
 ENV CXX=${CROSS_COMPILER_PREFIX}-g++
 ENV CPP=${CROSS_COMPILER_PREFIX}-cpp
 
+# compile go
 WORKDIR ${BASE_DIR}/go/src
 RUN ./all.bash
 
