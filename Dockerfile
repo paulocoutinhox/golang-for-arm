@@ -56,8 +56,8 @@ ENV GOARM=7
 ENV CGO_ENABLED=1
 
 WORKDIR ${BASE_DIR}/go/src
-RUN ./make.bash
+#RUN ./make.bash
 #RUN ./bootstrap.bash
-#RUN ./all.bash
+RUN ./all.bash
 
 CMD [bash]
